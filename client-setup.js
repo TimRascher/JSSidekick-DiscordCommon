@@ -8,6 +8,7 @@ export default () => {
     intents.add(I.DirectMessageTyping)
     intents.add(I.Guilds)
     intents.add(I.GuildMessages)
+    intents.add(I.GuildMembers)
     intents.add(I.MessageContent)
     return new Client({ intents: intents,  partials: [ Partials.Channel ] })
 }
