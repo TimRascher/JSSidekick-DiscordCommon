@@ -35,10 +35,14 @@ const LoadCommands = async (options) => {
  * @return { Collection }
  */
 const LoadCollection = async (options) => {
-    const commands = await LoadCommands(options?.path)
+    const opts = {
+        path: options?.path,
+        doBeforeAdding: options?.doBeforeAdding || ((obj) => {  })
+    }
+    const commands = await LoadCommands(opts)
     let collection = new Collection()
     commands.forEach(cmd => {
-        options?.doBeforeAdding(cmd)
+        opts.doBeforeAdding(cmd)
         collection.set(cmd.data.name, cmd)
     })
     return collection
