@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'url'
 import { Collection } from "discord.js"
 import fs from "fs"
 
@@ -25,7 +26,8 @@ const LoadCommands = async (options) => {
     let commands = []
     for (let i = 0; i < commandFiles.length; i++) {
         const filePath = `${opts.path}/${commandFiles[i]}`
-        const { default: command } = await import(filePath)
+        const url = pathToFileURL(filePath)
+        const { default: command } = await import(url)
         commands.push(command)
     }
     return commands
